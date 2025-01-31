@@ -12,7 +12,6 @@
   transform-style: preserve-3d;
   border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
 }
 
 @media (min-width: 768px) {
@@ -30,27 +29,26 @@
 }
 
 .cardReflection::before {
-  content: "";
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
   background: linear-gradient(
-    45deg,
+    var(--reflection-angle, 45deg),
     rgba(255, 255, 255, 0) 0%,
     rgba(255, 255, 255, 0.15) 50%,
     rgba(255, 255, 255, 0) 100%
   );
-  transform: rotate(30deg);
   animation: reflection 4s infinite linear;
+  animation-duration: calc(2s + (var(--rotate-y) * 0.05s));
+  transform: rotate(calc(var(--reflection-angle, 30deg) + 15deg))
+    translateZ(1px);
+  opacity: calc(0.3 + (abs(var(--rotate-x)) + abs(var(--rotate-y))) / 100);
 }
 
 @keyframes reflection {
   0% {
-    transform: translateX(-100%) rotate(30deg);
+    transform: translateX(-100%)
+      rotate(calc(var(--reflection-angle, 30deg) + 15deg));
   }
   100% {
-    transform: translateX(100%) rotate(30deg);
+    transform: translateX(100%)
+      rotate(calc(var(--reflection-angle, 30deg) + 15deg));
   }
 }

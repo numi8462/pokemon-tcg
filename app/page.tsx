@@ -122,9 +122,18 @@ export default function Home() {
               className={styles.card3d}
               style={{
                 transform: `rotateX(${rotation.x}deg) rotateY(${rotation.y}deg)`,
+                // 회전 각도를 CSS 변수로 전달
+                ['--rotate-x' as any]: `${rotation.x}deg`,
+                ['--rotate-y' as any]: `${rotation.y}deg`,
               }}
             >
-              <div className={styles.cardReflection}></div>
+              <div 
+                className={styles.cardReflection}
+                style={{
+                  // 반사 각도 계산
+                  ['--reflection-angle' as any]: `${Math.atan2(rotation.y, rotation.x) * 180 / Math.PI}deg`,
+                }}
+              ></div>
               <div className="relative w-full h-full">
                 <Image
                   src={selectedCard.imageSrc}
