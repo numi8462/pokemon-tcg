@@ -26,29 +26,6 @@
   inset: 0;
   overflow: hidden;
   pointer-events: none;
-}
-
-.cardReflection::before {
-  background: linear-gradient(
-    var(--reflection-angle, 45deg),
-    rgba(255, 255, 255, 0) 0%,
-    rgba(255, 255, 255, 0.15) 50%,
-    rgba(255, 255, 255, 0) 100%
-  );
-  animation: reflection 4s infinite linear;
-  animation-duration: calc(2s + (var(--rotate-y) * 0.05s));
-  transform: rotate(calc(var(--reflection-angle, 30deg) + 15deg))
-    translateZ(1px);
-  opacity: calc(0.3 + (abs(var(--rotate-x)) + abs(var(--rotate-y))) / 100);
-}
-
-@keyframes reflection {
-  0% {
-    transform: translateX(-100%)
-      rotate(calc(var(--reflection-angle, 30deg) + 15deg));
-  }
-  100% {
-    transform: translateX(100%)
-      rotate(calc(var(--reflection-angle, 30deg) + 15deg));
-  }
+  z-index: 99; /* 이미지 위에 표시되도록 설정 */
+  mix-blend-mode: overlay; /* 혼합 모드 추가 */
 }

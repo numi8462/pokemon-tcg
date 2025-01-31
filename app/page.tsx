@@ -54,7 +54,7 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen p-4 md:p-8 bg-gray-700">
+    <main className="min-h-screen p-4 md:p-8 bg-gray-900">
       <div className="flex justify-center p-4">
         <h1 className="text-7xl font-bold"> 포켓몬 도감</h1>
       </div>
@@ -65,7 +65,7 @@ export default function Home() {
             className="cursor-pointer"
             onClick={() => setSelectedCard(card)}
           >
-            <div className="aspect-[2/3] relative rounded-xl overflow-hidden transition-transform duration-300 hover:scale-105">
+            <div className="aspect-[2/3] relative rounded-xl transition-transform duration-300 hover:scale-105">
               <Image
                 src={card.imageSrc}
                 alt={`Card ${card.id}`}
@@ -80,7 +80,7 @@ export default function Home() {
       {/* 3D 카드 모델 */}
       {selectedCard && (
         <div
-          className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50"
+          className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center"
         >
           <IoIosCloseCircle 
             size={50}
@@ -127,13 +127,6 @@ export default function Home() {
                 ['--rotate-y' as any]: `${rotation.y}deg`,
               }}
             >
-              <div 
-                className={styles.cardReflection}
-                style={{
-                  // 반사 각도 계산
-                  ['--reflection-angle' as any]: `${Math.atan2(rotation.y, rotation.x) * 180 / Math.PI}deg`,
-                }}
-              ></div>
               <div className="relative w-full h-full">
                 <Image
                   src={selectedCard.imageSrc}
