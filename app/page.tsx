@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { supabase } from '@/lib/supabase'
 import Card from '@/components/Card';
 import Navbar from "@/components/Navbar";
+import { SearchFilters } from "@/components/SearchFilter";
 
 type Card = {
   id: number;
@@ -21,6 +22,19 @@ export default function Home() {
   const [selectedRarity, setSelectedRarity] = useState<string | null>(null);
   const [showEx, setShowEx] = useState(false);
   
+  // filter
+  const filteredCards = cards.filter(card => {
+    const nameMatch = card.name.toLowerCase().includes(searchQuery.toLowerCase());
+    const typeMatch = selectedType ? card.type === selectedType : true;
+    const rarityMatch = selectedRarity ? card.rarity === selectedRarity : true;
+    const exMatch = showEx ? card.ex : true;
+    
+    return nameMatch && typeMatch && rarityMatch && exMatch;
+  });
+
+  const rarities = Array.from(new Set(cards.map(card => card.rarity)));
+
+
   // supabase card data
   useEffect(() => {
     const fetchCards = async () => {
@@ -49,8 +63,19 @@ export default function Home() {
       <div className="flex justify-center p-4 mt-4">
         <h1 className="text-5xl font-bold">포켓몬 도감</h1>
       </div>
+      <SearchFilters
+        searchQuery={searchQuery}
+        selectedType={selectedType}
+        selectedRarity={selectedRarity}
+        showEx={showEx}
+        rarities={rarities}
+        setSearchQuery={setSearchQuery}
+        setSelectedType={setSelectedType}
+        setSelectedRarity={setSelectedRarity}
+        setShowEx={setShowEx}
+      />
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-6xl mx-auto p-4 md:p-8">
-        {cards.map(card => (
+        {filteredCards.map(card => (
           <Card key={card.id} card={card} />
         ))}
       </div>
