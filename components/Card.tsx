@@ -8,7 +8,7 @@ type CardProps = {
   imageSrc: string;
   name: string;
   type: string;
-  rarity: string;
+  rarity: Number;
   ex: boolean;
 };
 

@@ -10,7 +10,7 @@ type Card = {
   imageSrc: string;
   name: string;
   type: '전기' | '물' | '풀' | '초' | '악' | '강철' | '노말' | '불' | '격투';
-  rarity: string;
+  rarity: Number;
   ex: boolean;
 };
 
@@ -19,7 +19,7 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedType, setSelectedType] = useState<string | null>(null);
-  const [selectedRarity, setSelectedRarity] = useState<string | null>(null);
+  const [selectedRarity, setSelectedRarity] = useState<Number | 0>(0);
   const [showEx, setShowEx] = useState(false);
   
   // filter
@@ -31,9 +31,6 @@ export default function Home() {
     
     return nameMatch && typeMatch && rarityMatch && exMatch;
   });
-
-  const rarities = Array.from(new Set(cards.map(card => card.rarity)));
-
 
   // supabase card data
   useEffect(() => {
@@ -60,20 +57,22 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-gray-900">
       <Navbar />
-      <div className="flex justify-center p-4 mt-4">
-        <h1 className="text-5xl font-bold">포켓몬 도감</h1>
-      </div>
+
       <SearchFilters
         searchQuery={searchQuery}
         selectedType={selectedType}
         selectedRarity={selectedRarity}
         showEx={showEx}
-        rarities={rarities}
         setSearchQuery={setSearchQuery}
         setSelectedType={setSelectedType}
         setSelectedRarity={setSelectedRarity}
         setShowEx={setShowEx}
       />
+
+      <div className="flex justify-center p-4 mt-4">
+        <h1 className="text-5xl font-bold">포켓몬 도감</h1>
+      </div>
+
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-6xl mx-auto p-4 md:p-8">
         {filteredCards.map(card => (
           <Card key={card.id} card={card} />
