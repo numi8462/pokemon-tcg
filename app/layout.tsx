@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   title: "Pokedex-TCG",
   description: "포켓몬 카드게임 도감",
   icons: {
-    icon: '/icons/pokemon.png'
+    icon: 'https://numi8462.github.io/pokemon-tcg/icons/pokemon.png'
   }
 };
 
