@@ -84,10 +84,10 @@ export const SearchFilters = ({
                 <button
                   key={rarity}
                   onClick={() =>
-                    setSelectedRarity(selectedRarity == rarity ? 0 : rarity)
+                    setSelectedRarity(selectedRarity === rarity ? 0 : rarity)
                   }
                   className={`px-3 py-1 rounded-full transition-colors ${
-                    selectedRarity == rarity
+                    selectedRarity === rarity
                       ? "bg-blue-500"
                       : "bg-gray-700 hover:bg-gray-600"
                   } text-white`}

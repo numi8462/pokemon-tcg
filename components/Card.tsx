@@ -21,6 +21,7 @@ const Card = ({ card }: { card: CardProps }) => {
   const [isSelected, setIsSelected] = useState(false);
   const [rotation, setRotation] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
+  console.log(card.name);
 
   const handleMove = (movementX: number, movementY: number) => {
     setRotation((prev) => ({
