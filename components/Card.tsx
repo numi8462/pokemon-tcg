@@ -44,7 +44,7 @@ const Card = ({ card }: { card: CardProps }) => {
       </div>
 
       {isSelected && (
-        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-20">
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50">
           <IoIosCloseCircle 
             size={50}
             className="cursor-pointer absolute top-2 right-2 text-white hover:text-gray-300 transition-colors"
