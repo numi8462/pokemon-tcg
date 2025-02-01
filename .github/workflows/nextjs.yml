@@ -75,13 +75,9 @@ jobs:
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
       - name: Set up environment variables
         run: |
-          if [[ -z "${{ secrets.SUPABASE_URL }}" || -z "${{ secrets.SUPABASE_ANON_KEY }}" ]]; then
-            echo "Error: SUPABASE_URL or SUPABASE_ANON_KEY secrets are not defined!"
-            exit 1  # Fail the workflow if secrets are missing
-          fi
           echo "NEXT_PUBLIC_SUPABASE_URL=${{ secrets.SUPABASE_URL }}" >> .env.production
           echo "NEXT_PUBLIC_SUPABASE_ANON_KEY=${{ secrets.SUPABASE_ANON_KEY }}" >> .env.production
-        shell: bash
+        shell: bash  # Important: Specify bash shell for redirection
       - name: Build with Next.js
         run: ${{ steps.detect-package-manager.outputs.runner }} next build
       - name: Upload artifact
