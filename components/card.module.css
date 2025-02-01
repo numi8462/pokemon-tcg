@@ -16,16 +16,7 @@
 
 @media (min-width: 768px) {
   .card3d {
-    width: 400px;
-    height: 600px;
+    width: 500px;
+    height: 700px;
   }
-}
-
-.cardReflection {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-  pointer-events: none;
-  z-index: 99; /* 이미지 위에 표시되도록 설정 */
-  mix-blend-mode: overlay; /* 혼합 모드 추가 */
 }
