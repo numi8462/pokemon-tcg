@@ -10,16 +10,15 @@ type Card = {
   imageSrc: string;
   name: string;
   type: '전기' | '물' | '풀' | '초' | '악' | '강철' | '노말' | '불' | '격투';
-  rarity: Number;
+  rarity: number;
   ex: boolean;
 };
 
 export default function Home() {
   const [cards, setCards] = useState<Card[]>([]);
-  const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedType, setSelectedType] = useState<string | null>(null);
-  const [selectedRarity, setSelectedRarity] = useState<Number | 0>(0);
+  const [selectedRarity, setSelectedRarity] = useState<number | 0>(0);
   const [showEx, setShowEx] = useState(false);
   
   // filter
@@ -47,8 +46,6 @@ export default function Home() {
         setCards(data || [])
       } catch (error) {
         console.error('Error fetching cards:', error)
-      } finally {
-        setLoading(false)
       }
     }
     fetchCards()

@@ -4,11 +4,11 @@ import Image from "next/image";
 type SearchFiltersProps = {
   searchQuery: string;
   selectedType: string | null;
-  selectedRarity: Number | 0;
+  selectedRarity: number | 0;
   showEx: boolean;
   setSearchQuery: (value: string) => void;
   setSelectedType: (value: string | null) => void;
-  setSelectedRarity: (value: Number | 0) => void;
+  setSelectedRarity: (value: number | 0) => void;
   setShowEx: (value: boolean) => void;
 };
 
