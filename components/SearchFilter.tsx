@@ -23,6 +23,8 @@ export const SearchFilters = ({
   setShowEx,
 }: SearchFiltersProps) => {
   const [isOpen, setIsOpen] = useState(false);
+  const imageUrl = "https://numi8462.github.io/pokemon-tcg";
+
   return (
     <>
       <div className="flex flex-col items-center sticky top-16 bg-gray-900 z-10 p-4 space-y-4">
@@ -71,7 +73,7 @@ export const SearchFilters = ({
                       : "bg-gray-700 hover:bg-gray-600"
                   } text-white`}
                 >
-                  <Image src={`/icons/types/${type}.png`} alt="type icon" width={30} height={30}/>
+                  <Image src={`${imageUrl}/icons/types/${type}.png`} alt="type icon" width={30} height={30}/>
                 </button>
               ))}
             </div>
@@ -91,7 +93,7 @@ export const SearchFilters = ({
                   } text-white`}
                 >
                   <div className="h-[30px] w-auto">
-                    <Image src={`/icons/rarity/${rarity}.png`} alt="rarity icon" width={100} height={100} className="object-contain h-full w-auto"/>
+                    <Image src={`${imageUrl}/icons/rarity/${rarity}.png`} alt="rarity icon" width={100} height={100} className="object-contain h-full w-auto"/>
                   </div>
                   
                 </button>
