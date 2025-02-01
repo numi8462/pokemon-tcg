@@ -1,36 +1,43 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 포켓몬 3D 도감 📚✨
 
-## Getting Started
+Next.js 기반의 인터랙티브 포켓몬 카드게임 도감 사이트입니다. 실시간 검색/필터링 기능과 3D 카드 인터랙션을 제공하며, Supabase를 통해 데이터를 관리합니다. 현재는 일부 카드들만 있으며 추후 더 추가할 예정입니다.
 
-First, run the development server:
+![포켓몬 도감](https://github.com/user-attachments/assets/e3b73b82-17fc-42c1-a1d3-72fb66af538d)
 
+![3d 카드](https://github.com/user-attachments/assets/f897e7c3-3cdb-4096-8ee1-8da63085bc4b)
+
+## ✨ 주요 기능
+
+- **실시간 검색 & 필터링**
+  - 이름/타입 기반 즉시 검색
+  - 다중 조건 필터링 시스템
+- **3D 인터랙티브 카드**
+  - 카드 드래그시 회전 조작 가능
+  - 부드러운 애니메이션 전환
+- **실시간 데이터 동기화**
+  - Supabase 연동 자동 업데이트
+  - 효율적인 데이터 캐싱 처리
+
+## 🛠 기술 스택
+
+- **Frontend**
+  - Next.js 14 (App Router)
+  - React 18
+  - Tailwind CSS
+- **3D 구현**
+  - Three.js
+- **Backend**
+  - Supabase (실시간 DB)
+  - PostgreSQL
+
+## 🚀 시작하기
+
+### 선행 조건
+- Node.js v18 이상
+- Yarn 또는 npm
+
+### 설치 방법
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+git clone https://github.com/your-username/pokedex-3d.git
+cd pokedex-3d
+yarn install # 또는 npm install
