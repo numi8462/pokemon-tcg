@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import logo from "@/public/icons/poket.png";
+import logo from "@/public/icons/pokemon.png";
 
 const Navbar = () => {
     return (

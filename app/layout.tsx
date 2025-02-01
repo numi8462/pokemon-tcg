@@ -15,6 +15,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Pokedex-TCG",
   description: "포켓몬 카드게임 도감",
+  icons: {
+    icon: '/icons/pokemon.png'
+  }
 };
 
 export default function RootLayout({
