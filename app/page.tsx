@@ -29,13 +29,13 @@ export default function Home() {
     const typeMatch = selectedTypes.length > 0  // Check if any types are selected
       ? selectedTypes.some(type => card.type === type) // Use some to check if card.type matches ANY selected type
       : true; // If no types are selected, all cards match
-  
+
     const rarityMatch = selectedRarities.length > 0 // Check if any rarities are selected
       ? selectedRarities.includes(card.rarity) // Use includes to check if card.rarity is in the selectedRarities array
       : true; // If no rarities are selected, all cards match
   
     const exMatch = showEx ? card.ex : true;
-  
+
     return nameMatch && typeMatch && rarityMatch && exMatch; // Simplified return
   });
 
@@ -58,10 +58,6 @@ export default function Home() {
     };
     fetchCards();
   }, []);
-
-  // useEffect(() => {
-  //   console.log("filteredCards updated:", filteredCards);
-  // }, [filteredCards]); 
 
   return (
     <main className="min-h-screen bg-gray-900">
