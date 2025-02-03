@@ -27,9 +27,9 @@ export const SearchFilters = ({
 
   const handleTypeClick = (type: string) => {
     if (selectedTypes.includes(type)) {
-      setSelectedTypes(selectedTypes.filter((t) => t !== type));
+      setSelectedTypes(selectedTypes.filter((t) => t !== type)); // creates a new array excluding the selected type
     } else {
-      setSelectedTypes([...selectedTypes, type]);
+      setSelectedTypes([...selectedTypes, type]); // creates an array including the selected type
     }
   };
 
@@ -66,13 +66,13 @@ export const SearchFilters = ({
             <div className="flex flex-wrap gap-2 items-center">
               <span className="text-white basis-14">타입:</span>
               {[
-                "전기",
-                "물",
                 "풀",
                 "불",
+                "물",
+                "전기",
+                "초",
                 "격투",
                 "악",
-                "초",
                 "강철",
                 "드래곤",
                 "노말",
