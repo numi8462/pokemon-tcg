@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
-import { FaRegArrowAltCircleUp } from "react-icons/fa";
+import { FaArrowUp } from "react-icons/fa";
+import Image from 'next/image';
+import pikaImage from '@/public/icons/pikachu.png';
 
 const ScrollTop = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -33,9 +35,13 @@ const ScrollTop = () => {
       {isVisible && (
         <button
           onClick={scrollToTop}
-          className="p-1 text-white rounded-full shadow-lg bg-gray-900"
+          className="py-2 text-white rounded-full shadow-lg bg-blue-950 border-4"
         >
-          <FaRegArrowAltCircleUp size={40}/>
+          <div className='flex flex-col justify-center items-center'>
+            <FaArrowUp size={30} className='text-white'/>
+            <Image src={pikaImage} alt='pikachu image' width={50} />
+          </div>
+
         </button>
       )}
     </div>
