@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import styles from "./card.module.css";
 import { IoIosCloseCircle } from "react-icons/io";
@@ -22,6 +22,27 @@ const Card = ({ card }: { card: CardProps }) => {
   const [rotation, setRotation] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
   const [lastTouch, setLastTouch] = useState<{ x: number; y: number } | null>(null);
+  const [scrollPosition, setScrollPosition] = useState(0);
+
+  // Disable body scroll when card is selected
+  useEffect(() => {
+    if (isSelected) {
+      // Save current scroll position
+      setScrollPosition(window.pageYOffset);
+      // Lock body scroll
+      document.body.style.overflow = 'hidden';
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollPosition}px`;
+      document.body.style.width = '100%';
+    } else {
+      // Restore body scroll
+      document.body.style.overflow = '';
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+      window.scrollTo(0, scrollPosition);
+    }
+  }, [isSelected, scrollPosition]);
 
   const handleMove = (deltaX: number, deltaY: number) => {
     setRotation((prev) => ({
@@ -37,15 +58,15 @@ const Card = ({ card }: { card: CardProps }) => {
   };
 
   const handleTouchStart = (e: React.TouchEvent) => {
-    e.preventDefault(); // Prevent default touch behavior
+    e.preventDefault();
     const touch = e.touches[0];
     setLastTouch({ x: touch.clientX, y: touch.clientY });
     setIsDragging(true);
   };
 
   const handleTouchMove = (e: React.TouchEvent) => {
+    e.preventDefault();
     if (isDragging && e.touches.length === 1 && lastTouch) {
-      e.preventDefault(); // Prevent default touch behavior
       const touch = e.touches[0];
       const deltaX = touch.clientX - lastTouch.x;
       const deltaY = touch.clientY - lastTouch.y;
@@ -75,18 +96,23 @@ const Card = ({ card }: { card: CardProps }) => {
       </div>
 
       {isSelected && (
-        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50">
+        <div 
+          className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50"
+          onTouchMove={(e) => e.preventDefault()} // Prevent background scroll on iOS
+        >
           <IoIosCloseCircle
             size={50}
             className="cursor-pointer absolute top-2 right-2 text-white hover:text-gray-300 transition-colors"
             onClick={() => setIsSelected(false)}
+            tabIndex={0} // Make close button properly focusable
           />
           <div
             className={`${styles.cardContainer} cursor-grab active:cursor-grabbing`}
             style={{
-              touchAction: 'none', // Disable browser touch handling
-              userSelect: 'none', // Prevent text selection
-              WebkitUserSelect: 'none' // Safari specific
+              touchAction: 'none',
+              userSelect: 'none',
+              WebkitUserSelect: 'none',
+              WebkitTouchCallout: 'none' // Disable iOS touch callout
             }}
             onDragStart={(e) => e.preventDefault()}
             onMouseDown={() => setIsDragging(true)}
@@ -118,6 +144,7 @@ const Card = ({ card }: { card: CardProps }) => {
                   fill
                   className="object-contain"
                   draggable={false}
+                  tabIndex={-1} // Prevent image from being focusable
                 />
               </div>
             </div>

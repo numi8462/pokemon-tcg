@@ -43,8 +43,8 @@ export const SearchFilters = ({
 
   return (
     <>
-      <div className="flex flex-col items-center sticky top-0 bg-gray-900 z-10 p-4 space-y-4">
-        <div className="flex w-full max-w-[42rem] gap-4">
+      <div className="flex flex-col items-center sticky top-0 z-10 p-4 space-y-4 bg-gray-900 ">
+        <div className="flex w-full max-w-[42rem] gap-4 ">
           <input
             type="text"
             placeholder="카드 이름으로 검색..."
@@ -59,10 +59,11 @@ export const SearchFilters = ({
             필터
           </button>
         </div>
-      </div>
-      {isOpen && (
+        {isOpen && (
         <div className="flex justify-center">
-          <div className={`flex flex-col fixed gap-4 p-4 rounded-lg justify-center bg-gray-800 border border-gray-700 z-30 lg:w-[42rem]`}>
+          <div 
+            className={`flex flex-col gap-4 p-4 rounded-lg justify-center bg-gray-800 border border-gray-700 z-30 lg:w-[42rem]`}       
+          >
             <div className="flex flex-wrap gap-2 items-center">
               <span className="text-white basis-14">타입:</span>
               <div className="flex flex-wrap gap-2 items-center">
@@ -132,6 +133,8 @@ export const SearchFilters = ({
           </div>
         </div>
       )}
+      </div>
+
     </>
   );
 };
