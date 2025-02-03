@@ -24,8 +24,6 @@ Next.js 기반의 인터랙티브 포켓몬 카드게임 도감 사이트입니�
   - Next.js 14 (App Router)
   - React 18
   - Tailwind CSS
-- **3D 구현**
-  - Three.js
 - **Backend**
   - Supabase (실시간 DB)
   - PostgreSQL
