@@ -44,7 +44,7 @@ export const SearchFilters = ({
   return (
     <>
       <div className="flex flex-col items-center sticky top-16 bg-gray-900 z-10 p-4 space-y-4">
-        <div className="flex w-full max-w-[40rem] gap-4">
+        <div className="flex w-full max-w-[42rem] gap-4">
           <input
             type="text"
             placeholder="카드 이름으로 검색..."
@@ -62,53 +62,59 @@ export const SearchFilters = ({
       </div>
       {isOpen && (
         <div className="flex justify-center">
-          <div className="flex flex-col fixed top-32 gap-4 p-4 rounded-lg justify-center bg-gray-800 border border-gray-700 z-30 lg:w-[40rem]">
+          <div className="flex flex-col fixed top-32 gap-4 p-4 rounded-lg justify-center bg-gray-800 border border-gray-700 z-30 lg:w-[42rem]">
             <div className="flex flex-wrap gap-2 items-center">
               <span className="text-white basis-14">타입:</span>
-              {[
-                "풀",
-                "불",
-                "물",
-                "전기",
-                "초",
-                "격투",
-                "악",
-                "강철",
-                "드래곤",
-                "노말",
-              ].map((type) => (
-                <button
-                  key={type}
-                  onClick={() => handleTypeClick(type)}
-                  className={`px-2 py-2 rounded-full transition-colors ${
-                    selectedTypes.includes(type)
-                      ? "bg-blue-500"
-                      : "bg-gray-700 hover:bg-gray-600"
-                  } text-white`}
-                >
-                  <Image src={`${imageUrl}/icons/types/${type}.png`} alt="type icon" width={30} height={30}/>
-                </button>
-              ))}
+              <div className="flex flex-wrap gap-2 items-center">
+                {[
+                  "풀",
+                  "불",
+                  "물",
+                  "전기",
+                  "초",
+                  "격투",
+                  "악",
+                  "강철",
+                  "드래곤",
+                  "노말",
+                ].map((type) => (
+                  <button
+                    key={type}
+                    onClick={() => handleTypeClick(type)}
+                    className={`px-2 py-2 rounded-full transition-colors ${
+                      selectedTypes.includes(type)
+                        ? "bg-blue-500"
+                        : "bg-gray-700 hover:bg-gray-600"
+                    } text-white`}
+                  >
+                    <Image src={`${imageUrl}/icons/types/${type}.png`} alt="type icon" width={30} height={30}/>
+                  </button>
+                ))}
+              </div>
+              
             </div>
 
             <div className="flex flex-wrap gap-2 items-center">
               <span className="text-white basis-14">희귀도:</span>
-              {[1, 2, 3, 4, 5, 6, 7, 8].map((rarity) => (
-                <button
-                  key={rarity}
-                  onClick={() => handleRarityClick(rarity)}
-                  className={`px-3 py-1 rounded-full transition-colors ${
-                    selectedRarities.includes(rarity)
-                      ? "bg-blue-500"
-                      : "bg-gray-700 hover:bg-gray-600"
-                  } text-white`}
-                >
-                  <div className="h-[30px] w-auto">
-                    <Image src={`${imageUrl}/icons/rarity/${rarity}.png`} alt="rarity icon" width={100} height={100} className="object-contain h-full w-auto"/>
-                  </div>
-                  
-                </button>
-              ))}
+              <div className="flex flex-wrap gap-2 items-center">
+                {[1, 2, 3, 4, 5, 6, 7, 8].map((rarity) => (
+                  <button
+                    key={rarity}
+                    onClick={() => handleRarityClick(rarity)}
+                    className={`px-3 py-1 rounded-full transition-colors ${
+                      selectedRarities.includes(rarity)
+                        ? "bg-blue-500"
+                        : "bg-gray-700 hover:bg-gray-600"
+                    } text-white`}
+                  >
+                    <div className="h-[20px] w-auto">
+                      <Image src={`${imageUrl}/icons/rarity/${rarity}.png`} alt="rarity icon" width={100} height={100} className="object-contain h-full w-auto"/>
+                    </div>
+                    
+                  </button>
+                ))}
+              </div>
+
             </div>
             
             <div className="flex flex-wrap gap-2 items-center">
