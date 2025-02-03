@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 
 type SearchFiltersProps = {
@@ -59,10 +59,11 @@ export const SearchFilters = ({
             필터
           </button>
         </div>
-        {isOpen && (
-        <div className="flex justify-center">
-          <div 
-            className={`flex flex-col gap-4 p-4 rounded-lg justify-center bg-gray-800 border border-gray-700 z-30 lg:w-[42rem]`}       
+      </div>
+      {isOpen && (
+        <div className={`flex justify-center z-10 sticky top-[4.5rem]`}>
+          <div
+            className={`flex flex-col gap-4 p-4 rounded-lg justify-center bg-gray-800 border border-gray-700 z-30 lg:w-[42rem]`}
           >
             <div className="flex flex-wrap gap-2 items-center">
               <span className="text-white basis-14">타입:</span>
@@ -88,11 +89,15 @@ export const SearchFilters = ({
                         : "bg-gray-700 hover:bg-gray-600"
                     } text-white`}
                   >
-                    <Image src={`${imageUrl}/icons/types/${type}.png`} alt="type icon" width={30} height={30}/>
+                    <Image
+                      src={`${imageUrl}/icons/types/${type}.png`}
+                      alt="type icon"
+                      width={30}
+                      height={30}
+                    />
                   </button>
                 ))}
               </div>
-              
             </div>
 
             <div className="flex flex-wrap gap-2 items-center">
@@ -109,15 +114,19 @@ export const SearchFilters = ({
                     } text-white`}
                   >
                     <div className="h-[20px] w-auto">
-                      <Image src={`${imageUrl}/icons/rarity/${rarity}.png`} alt="rarity icon" width={100} height={100} className="object-contain h-full w-auto"/>
+                      <Image
+                        src={`${imageUrl}/icons/rarity/${rarity}.png`}
+                        alt="rarity icon"
+                        width={100}
+                        height={100}
+                        className="object-contain h-full w-auto"
+                      />
                     </div>
-                    
                   </button>
                 ))}
               </div>
-
             </div>
-            
+
             <div className="flex flex-wrap gap-2 items-center">
               <span className="text-white basis-14">종류: </span>
               <button
@@ -129,12 +138,9 @@ export const SearchFilters = ({
                 EX 카드
               </button>
             </div>
-            
           </div>
         </div>
       )}
-      </div>
-
     </>
   );
 };
