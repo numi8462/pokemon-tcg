@@ -4,6 +4,7 @@ import { supabase } from "@/lib/supabase";
 import Card from "@/components/Card";
 import Navbar from "@/components/Navbar";
 import { SearchFilters } from "@/components/SearchFilter";
+import ScrollTop from "@/components/ScrollTop";
 
 type Card = {
   id: number;
@@ -62,7 +63,7 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-gray-900">
       <Navbar />
-
+      <ScrollTop />
       <SearchFilters
         searchQuery={searchQuery}
         selectedTypes={selectedTypes}
