@@ -3,27 +3,43 @@ import Image from "next/image";
 
 type SearchFiltersProps = {
   searchQuery: string;
-  selectedType: string | null;
-  selectedRarity: number | 0;
+  selectedTypes: string[];
+  selectedRarities: number[];
   showEx: boolean;
   setSearchQuery: (value: string) => void;
-  setSelectedType: (value: string | null) => void;
-  setSelectedRarity: (value: number | 0) => void;
+  setSelectedTypes: (value: string[]) => void;
+  setSelectedRarities: (value: number[]) => void;
   setShowEx: (value: boolean) => void;
 };
 
 export const SearchFilters = ({
   searchQuery,
-  selectedType,
-  selectedRarity,
+  selectedTypes,
+  selectedRarities,
   showEx,
   setSearchQuery,
-  setSelectedType,
-  setSelectedRarity,
+  setSelectedTypes,
+  setSelectedRarities,
   setShowEx,
 }: SearchFiltersProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const imageUrl = "https://numi8462.github.io/pokemon-tcg";
+
+  const handleTypeClick = (type: string) => {
+    if (selectedTypes.includes(type)) {
+      setSelectedTypes(selectedTypes.filter((t) => t !== type));
+    } else {
+      setSelectedTypes([...selectedTypes, type]);
+    }
+  };
+
+  const handleRarityClick = (rarity: number) => {
+    if (selectedRarities.includes(rarity)) {
+      setSelectedRarities(selectedRarities.filter((r) => r !== rarity));
+    } else {
+      setSelectedRarities([...selectedRarities, rarity]);
+    }
+  };
 
   return (
     <>
@@ -60,15 +76,12 @@ export const SearchFilters = ({
                 "강철",
                 "드래곤",
                 "노말",
-                
               ].map((type) => (
                 <button
                   key={type}
-                  onClick={() =>
-                    setSelectedType(selectedType === type ? null : type)
-                  }
+                  onClick={() => handleTypeClick(type)}
                   className={`px-2 py-2 rounded-full transition-colors ${
-                    selectedType === type
+                    selectedTypes.includes(type)
                       ? "bg-blue-500"
                       : "bg-gray-700 hover:bg-gray-600"
                   } text-white`}
@@ -83,11 +96,9 @@ export const SearchFilters = ({
               {[1, 2, 3, 4, 5, 6, 7, 8].map((rarity) => (
                 <button
                   key={rarity}
-                  onClick={() =>
-                    setSelectedRarity(selectedRarity === rarity ? 0 : rarity)
-                  }
+                  onClick={() => handleRarityClick(rarity)}
                   className={`px-3 py-1 rounded-full transition-colors ${
-                    selectedRarity === rarity
+                    selectedRarities.includes(rarity)
                       ? "bg-blue-500"
                       : "bg-gray-700 hover:bg-gray-600"
                   } text-white`}

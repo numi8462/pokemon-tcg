@@ -17,23 +17,26 @@ type Card = {
 export default function Home() {
   const [cards, setCards] = useState<Card[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedType, setSelectedType] = useState<string | null>(null);
-  const [selectedRarity, setSelectedRarity] = useState<number | 0>(0);
+  const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
+  const [selectedRarities, setSelectedRarities] = useState<number[]>([]);
   const [showEx, setShowEx] = useState(false);
   const [loading, setLoading] = useState(true);
 
   // filter
   const filteredCards = cards.filter((card) => {
-    const nameMatch = card.name
-      .toLowerCase()
-      .includes(searchQuery.toLowerCase());
-    const typeMatch = selectedType ? card.type === selectedType : true;
-    const rarityMatch = selectedRarity ? card.rarity === selectedRarity : true;
+    const nameMatch = card.name.toLowerCase().includes(searchQuery.toLowerCase());
+  
+    const typeMatch = selectedTypes.length > 0  // Check if any types are selected
+      ? selectedTypes.some(type => card.type === type) // Use some to check if card.type matches ANY selected type
+      : true; // If no types are selected, all cards match
+  
+    const rarityMatch = selectedRarities.length > 0 // Check if any rarities are selected
+      ? selectedRarities.includes(card.rarity) // Use includes to check if card.rarity is in the selectedRarities array
+      : true; // If no rarities are selected, all cards match
+  
     const exMatch = showEx ? card.ex : true;
-    if (nameMatch && typeMatch && rarityMatch && exMatch) {
-      console.log(card.name);
-      return card;
-    }
+  
+    return nameMatch && typeMatch && rarityMatch && exMatch; // Simplified return
   });
 
   // supabase card data
@@ -42,9 +45,9 @@ export default function Home() {
       setLoading(true);
       try {
         const { data, error } = await supabase
-          .from("cards")
+          .from("dialga_palkia_expansion_cards")
           .select("*")
-          .order("id", { ascending: false });
+          .order("id", { ascending: true });
         if (error) throw error;
         setCards(data || []);
       } catch (error) {
@@ -56,9 +59,9 @@ export default function Home() {
     fetchCards();
   }, []);
 
-  useEffect(() => {
-    console.log("filteredCards updated:", filteredCards);
-  }, [filteredCards]); 
+  // useEffect(() => {
+  //   console.log("filteredCards updated:", filteredCards);
+  // }, [filteredCards]); 
 
   return (
     <main className="min-h-screen bg-gray-900">
@@ -66,17 +69,17 @@ export default function Home() {
 
       <SearchFilters
         searchQuery={searchQuery}
-        selectedType={selectedType}
-        selectedRarity={selectedRarity}
+        selectedTypes={selectedTypes}
+        selectedRarities={selectedRarities}
         showEx={showEx}
         setSearchQuery={setSearchQuery}
-        setSelectedType={setSelectedType}
-        setSelectedRarity={setSelectedRarity}
+        setSelectedTypes={setSelectedTypes}
+        setSelectedRarities={setSelectedRarities}
         setShowEx={setShowEx}
       />
 
       <div className="flex justify-center p-4 mt-4">
-        <h1 className="text-5xl font-bold">포켓몬 도감</h1>
+        <h1 className="text-5xl font-bold">포켓몬 카드 도감</h1>
       </div>
 
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-6xl mx-auto p-4 md:p-8">
