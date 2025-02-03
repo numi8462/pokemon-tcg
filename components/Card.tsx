@@ -70,7 +70,8 @@ const Card = ({ card }: { card: CardProps }) => {
       const touch = e.touches[0];
       const deltaX = touch.clientX - lastTouch.x;
       const deltaY = touch.clientY - lastTouch.y;
-      handleMove(deltaX, deltaY);
+      // 터치 감도 2배 증가 (기존 0.5 -> 1.0)
+      handleMove(deltaX * 2, deltaY * 2);
       setLastTouch({ x: touch.clientX, y: touch.clientY });
     }
   };
@@ -112,7 +113,10 @@ const Card = ({ card }: { card: CardProps }) => {
               touchAction: 'none',
               userSelect: 'none',
               WebkitUserSelect: 'none',
-              WebkitTouchCallout: 'none' // Disable iOS touch callout
+              WebkitTouchCallout: 'none', // Disable iOS touch callout
+              // 터치 영역 확대를 위한 추가 스타일
+              padding: '20px',
+              margin: '-20px'
             }}
             onDragStart={(e) => e.preventDefault()}
             onMouseDown={() => setIsDragging(true)}
