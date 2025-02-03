@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     description: "포켓몬 카드게임 도감",
     images: [
         {
-            url: "https://numi8462.github.io/pokemon-tcg/preview.png",
+            url: "https://numi8462.github.io/pokemon-tcg/cover/preview.png",
             width: 1898,
             height: 910,
             alt: "Pokedex-TCG 미리보기 이미지",
