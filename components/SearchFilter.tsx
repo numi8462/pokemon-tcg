@@ -43,7 +43,7 @@ export const SearchFilters = ({
 
   return (
     <>
-      <div className="flex flex-col items-center sticky top-16 bg-gray-900 z-10 p-4 space-y-4">
+      <div className="flex flex-col items-center sticky top-0 bg-gray-900 z-10 p-4 space-y-4">
         <div className="flex w-full max-w-[42rem] gap-4">
           <input
             type="text"
@@ -53,7 +53,7 @@ export const SearchFilters = ({
             className="flex-1 w-full px-4 py-2 rounded-lg bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <button
-            className="px-3 py-1 rounded-lg bg-pink-600 w-20"
+            className="px-3 py-1 rounded-lg bg-pink-600 w-20 text-white text-xl"
             onClick={() => setIsOpen(!isOpen)}
           >
             필터
@@ -62,7 +62,7 @@ export const SearchFilters = ({
       </div>
       {isOpen && (
         <div className="flex justify-center">
-          <div className="flex flex-col fixed top-32 gap-4 p-4 rounded-lg justify-center bg-gray-800 border border-gray-700 z-30 lg:w-[42rem]">
+          <div className={`flex flex-col fixed gap-4 p-4 rounded-lg justify-center bg-gray-800 border border-gray-700 z-30 lg:w-[42rem]`}>
             <div className="flex flex-wrap gap-2 items-center">
               <span className="text-white basis-14">타입:</span>
               <div className="flex flex-wrap gap-2 items-center">

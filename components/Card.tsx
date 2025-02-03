@@ -21,13 +21,43 @@ const Card = ({ card }: { card: CardProps }) => {
   const [isSelected, setIsSelected] = useState(false);
   const [rotation, setRotation] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
-  console.log(card.name);
+  const [lastTouch, setLastTouch] = useState<{ x: number; y: number } | null>(null);
 
-  const handleMove = (movementX: number, movementY: number) => {
+  const handleMove = (deltaX: number, deltaY: number) => {
     setRotation((prev) => ({
-      x: Math.max(-20, Math.min(20, prev.x + movementY * 0.5)),
-      y: Math.max(-20, Math.min(20, prev.y - movementX * 0.5)),
+      x: Math.max(-20, Math.min(20, prev.x + deltaY * 0.5)),
+      y: Math.max(-20, Math.min(20, prev.y - deltaX * 0.5)),
     }));
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (isDragging) {
+      handleMove(e.movementX, e.movementY);
+    }
+  };
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    e.preventDefault(); // Prevent default touch behavior
+    const touch = e.touches[0];
+    setLastTouch({ x: touch.clientX, y: touch.clientY });
+    setIsDragging(true);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (isDragging && e.touches.length === 1 && lastTouch) {
+      e.preventDefault(); // Prevent default touch behavior
+      const touch = e.touches[0];
+      const deltaX = touch.clientX - lastTouch.x;
+      const deltaY = touch.clientY - lastTouch.y;
+      handleMove(deltaX, deltaY);
+      setLastTouch({ x: touch.clientX, y: touch.clientY });
+    }
+  };
+
+  const handleTouchEnd = () => {
+    setIsDragging(false);
+    setRotation({ x: 0, y: 0 });
+    setLastTouch(null);
   };
 
   return (
@@ -39,9 +69,7 @@ const Card = ({ card }: { card: CardProps }) => {
             alt={`Card ${card.id}`}
             fill
             className="object-contain"
-            onDragStart={(e) => {
-              e.preventDefault();
-            }}
+            onDragStart={(e) => e.preventDefault()}
           />
         </div>
       </div>
@@ -55,13 +83,14 @@ const Card = ({ card }: { card: CardProps }) => {
           />
           <div
             className={`${styles.cardContainer} cursor-grab active:cursor-grabbing`}
-            onDragStart={(e) => {
-              e.preventDefault();
+            style={{
+              touchAction: 'none', // Disable browser touch handling
+              userSelect: 'none', // Prevent text selection
+              WebkitUserSelect: 'none' // Safari specific
             }}
+            onDragStart={(e) => e.preventDefault()}
             onMouseDown={() => setIsDragging(true)}
-            onMouseMove={(e) =>
-              isDragging && handleMove(e.movementX, e.movementY)
-            }
+            onMouseMove={handleMouseMove}
             onMouseUp={() => {
               setIsDragging(false);
               setRotation({ x: 0, y: 0 });
@@ -70,6 +99,9 @@ const Card = ({ card }: { card: CardProps }) => {
               setIsDragging(false);
               setRotation({ x: 0, y: 0 });
             }}
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
           >
             <div
               className={styles.card3d}
@@ -85,6 +117,7 @@ const Card = ({ card }: { card: CardProps }) => {
                   alt="Selected card"
                   fill
                   className="object-contain"
+                  draggable={false}
                 />
               </div>
             </div>
