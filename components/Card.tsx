@@ -13,15 +13,17 @@ type CardProps = {
 };
 
 type Card3DStyle = React.CSSProperties & {
-  '--rotate-x': string;
-  '--rotate-y': string;
+  "--rotate-x": string;
+  "--rotate-y": string;
 };
 
 const Card = ({ card }: { card: CardProps }) => {
   const [isSelected, setIsSelected] = useState(false);
   const [rotation, setRotation] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
-  const [lastTouch, setLastTouch] = useState<{ x: number; y: number } | null>(null);
+  const [lastTouch, setLastTouch] = useState<{ x: number; y: number } | null>(
+    null
+  );
   const [scrollPosition, setScrollPosition] = useState(0);
 
   // Disable body scroll when card is selected
@@ -30,16 +32,16 @@ const Card = ({ card }: { card: CardProps }) => {
       // Save current scroll position
       setScrollPosition(window.pageYOffset);
       // Lock body scroll
-      document.body.style.overflow = 'hidden';
-      document.body.style.position = 'fixed';
+      document.body.style.overflow = "hidden";
+      document.body.style.position = "fixed";
       document.body.style.top = `-${scrollPosition}px`;
-      document.body.style.width = '100%';
+      document.body.style.width = "100%";
     } else {
       // Restore body scroll
-      document.body.style.overflow = '';
-      document.body.style.position = '';
-      document.body.style.top = '';
-      document.body.style.width = '';
+      document.body.style.overflow = "";
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.width = "";
       window.scrollTo(0, scrollPosition);
     }
   }, [isSelected, scrollPosition]);
@@ -97,7 +99,7 @@ const Card = ({ card }: { card: CardProps }) => {
       </div>
 
       {isSelected && (
-        <div 
+        <div
           className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50"
           onTouchMove={(e) => e.preventDefault()} // Prevent background scroll on iOS
         >
@@ -110,13 +112,13 @@ const Card = ({ card }: { card: CardProps }) => {
           <div
             className={`${styles.cardContainer} cursor-grab active:cursor-grabbing`}
             style={{
-              touchAction: 'none',
-              userSelect: 'none',
-              WebkitUserSelect: 'none',
-              WebkitTouchCallout: 'none', // Disable iOS touch callout
+              touchAction: "none",
+              userSelect: "none",
+              WebkitUserSelect: "none",
+              WebkitTouchCallout: "none", // Disable iOS touch callout
               // 터치 영역 확대를 위한 추가 스타일
-              padding: '20px',
-              margin: '-20px'
+              padding: "20px",
+              margin: "-20px",
             }}
             onDragStart={(e) => e.preventDefault()}
             onMouseDown={() => setIsDragging(true)}
@@ -137,8 +139,8 @@ const Card = ({ card }: { card: CardProps }) => {
               className={styles.card3d}
               style={{
                 transform: `rotateX(${rotation.x}deg) rotateY(${rotation.y}deg)`,
-                ['--rotate-x' as keyof Card3DStyle]: `${rotation.x}deg`,
-                ['--rotate-y' as keyof Card3DStyle]: `${rotation.y}deg`,
+                ["--rotate-x" as keyof Card3DStyle]: `${rotation.x}deg`,
+                ["--rotate-y" as keyof Card3DStyle]: `${rotation.y}deg`,
               }}
             >
               <div className="relative w-full h-full">
