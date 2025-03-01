@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import styles from "./card.module.css";
 import { IoIosCloseCircle } from "react-icons/io";
@@ -24,27 +24,6 @@ const Card = ({ card }: { card: CardProps }) => {
   const [lastTouch, setLastTouch] = useState<{ x: number; y: number } | null>(
     null
   );
-  const [scrollPosition, setScrollPosition] = useState(0);
-
-  // Disable body scroll when card is selected
-  useEffect(() => {
-    if (isSelected) {
-      // Save current scroll position
-      setScrollPosition(window.pageYOffset);
-      // Lock body scroll
-      document.body.style.overflow = "hidden";
-      document.body.style.position = "fixed";
-      document.body.style.top = `-${scrollPosition}px`;
-      document.body.style.width = "100%";
-    } else {
-      // Restore body scroll
-      document.body.style.overflow = "";
-      document.body.style.position = "";
-      document.body.style.top = "";
-      document.body.style.width = "";
-      window.scrollTo(0, scrollPosition);
-    }
-  }, [isSelected, scrollPosition]);
 
   const handleMove = (deltaX: number, deltaY: number) => {
     setRotation((prev) => ({

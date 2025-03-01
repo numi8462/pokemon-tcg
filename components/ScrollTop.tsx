@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 import { FaArrowUp } from "react-icons/fa";
-import Image from 'next/image';
-import pikaImage from '@/public/icons/pikachu.png';
+import Image from "next/image";
+import pikaImage from "@/public/icons/pikachu.png";
 
 const ScrollTop = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -19,14 +19,14 @@ const ScrollTop = () => {
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
-      behavior: 'smooth',
+      behavior: "smooth",
     });
   };
 
   useEffect(() => {
-    window.addEventListener('scroll', toggleVisibility);
+    window.addEventListener("scroll", toggleVisibility);
     return () => {
-      window.removeEventListener('scroll', toggleVisibility);
+      window.removeEventListener("scroll", toggleVisibility);
     };
   }, []);
 
@@ -37,11 +37,10 @@ const ScrollTop = () => {
           onClick={scrollToTop}
           className="py-2 text-white rounded-full shadow-lg bg-blue-950 border-4"
         >
-          <div className='flex flex-col justify-center items-center'>
-            <FaArrowUp size={30} className='text-white'/>
-            <Image src={pikaImage} alt='pikachu image' width={50} />
+          <div className="flex flex-col justify-center items-center">
+            <FaArrowUp size={30} className="text-white" />
+            <Image src={pikaImage} alt="pikachu image" width={50} />
           </div>
-
         </button>
       )}
     </div>
