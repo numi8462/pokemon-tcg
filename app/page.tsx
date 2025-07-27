@@ -34,9 +34,15 @@ export default async function HomePageServer() {
       ...(arceusResult.data || []),
       ...(dialgaPalkiaResult.data || []),
     ];
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('서버에서 카드 데이터를 가져오는 중 오류 발생:', error);
-    loadingError = error.message || '카드 데이터를 불러오는 데 실패했습니다.';
+
+    // error의 타입을 확인하여 적절한 메시지를 설정합니다.
+    if (error instanceof Error) {
+      loadingError = `데이터 로딩 오류: ${error.message}`;
+    } else {
+      loadingError = '알 수 없는 오류가 발생했습니다.';
+    }
   }
 
   // 가져온 데이터를 클라이언트 컴포넌트에 props로 전달합니다.
