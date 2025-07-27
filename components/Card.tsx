@@ -3,7 +3,7 @@ import Image from 'next/image';
 import styles from './card.module.css';
 import { IoIosCloseCircle } from 'react-icons/io';
 
-type CardProps = {
+export type CardProps = {
   id: number;
   imageSrc: string;
   name: string;
