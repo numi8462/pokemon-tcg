@@ -57,14 +57,14 @@ export default function Home() {
           .select('*')
           .order('id', { ascending: true });
         console.log(arceusResult.data);
-        // if (arceusResult.error) throw arceusResult.error;
+        if (arceusResult.error) throw arceusResult.error;
 
         // 디아루가 펄기아 카드팩
         const dialgaPalkiaResult = await supabase
           .from('dialga_palkia_expansion_cards')
           .select('*')
           .order('id', { ascending: true });
-        // if (dialgaPalkiaResult.error) throw dialgaPalkiaResult.error;
+        if (dialgaPalkiaResult.error) throw dialgaPalkiaResult.error;
 
         // 두 데이터 배열을 합쳐서 상태에 설정
         setCards([
