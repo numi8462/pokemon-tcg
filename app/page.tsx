@@ -1,25 +1,25 @@
-"use client";
-import { useState, useEffect } from "react";
-import { supabase } from "@/lib/supabase";
-import Card from "@/components/Card";
-import Navbar from "@/components/Navbar";
-import { SearchFilters } from "@/components/SearchFilter";
-import ScrollTop from "@/components/ScrollTop";
-import Image from "next/image";
-import logo from "@/public/icons/pokeball.png";
+'use client';
+import { useState, useEffect } from 'react';
+import { supabase } from '@/lib/supabase';
+import Card from '@/components/Card';
+import Navbar from '@/components/Navbar';
+import { SearchFilters } from '@/components/SearchFilter';
+import ScrollTop from '@/components/ScrollTop';
+import Image from 'next/image';
+import logo from '@/public/icons/pokeball.png';
 
 type Card = {
   id: number;
   imageSrc: string;
   name: string;
-  type: "전기" | "물" | "풀" | "초" | "악" | "강철" | "노말" | "불" | "격투";
+  type: '전기' | '물' | '풀' | '초' | '악' | '강철' | '노말' | '불' | '격투';
   rarity: number;
   ex: boolean;
 };
 
 export default function Home() {
   const [cards, setCards] = useState<Card[]>([]);
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState('');
   const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
   const [selectedRarities, setSelectedRarities] = useState<number[]>([]);
   const [showEx, setShowEx] = useState(false);
@@ -53,18 +53,18 @@ export default function Home() {
       try {
         // 아르세우스 카드팩
         const arceusResult = await supabase
-          .from("arceus_expansion_cards")
-          .select("*")
-          .order("id", { ascending: true });
+          .from('arceus_expansion_cards')
+          .select('*')
+          .order('id', { ascending: true });
         console.log(arceusResult.data);
-        if (arceusResult.error) throw arceusResult.error;
+        // if (arceusResult.error) throw arceusResult.error;
 
         // 디아루가 펄기아 카드팩
         const dialgaPalkiaResult = await supabase
-          .from("dialga_palkia_expansion_cards")
-          .select("*")
-          .order("id", { ascending: true });
-        if (dialgaPalkiaResult.error) throw dialgaPalkiaResult.error;
+          .from('dialga_palkia_expansion_cards')
+          .select('*')
+          .order('id', { ascending: true });
+        // if (dialgaPalkiaResult.error) throw dialgaPalkiaResult.error;
 
         // 두 데이터 배열을 합쳐서 상태에 설정
         setCards([
@@ -72,7 +72,7 @@ export default function Home() {
           ...(dialgaPalkiaResult.data || []),
         ]);
       } catch (error) {
-        console.error("Error fetching cards:", error);
+        console.error('Error fetching cards:', error);
       } finally {
         setLoading(false);
       }
