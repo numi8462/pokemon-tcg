@@ -1,7 +1,7 @@
-import { useState } from "react";
-import Image from "next/image";
-import styles from "./card.module.css";
-import { IoIosCloseCircle } from "react-icons/io";
+import { useState } from 'react';
+import Image from 'next/image';
+import styles from './card.module.css';
+import { IoIosCloseCircle } from 'react-icons/io';
 
 type CardProps = {
   id: number;
@@ -13,8 +13,8 @@ type CardProps = {
 };
 
 type Card3DStyle = React.CSSProperties & {
-  "--rotate-x": string;
-  "--rotate-y": string;
+  '--rotate-x': string;
+  '--rotate-y': string;
 };
 
 const Card = ({ card }: { card: CardProps }) => {
@@ -91,13 +91,13 @@ const Card = ({ card }: { card: CardProps }) => {
           <div
             className={`${styles.cardContainer} cursor-grab active:cursor-grabbing`}
             style={{
-              touchAction: "none",
-              userSelect: "none",
-              WebkitUserSelect: "none",
-              WebkitTouchCallout: "none", // Disable iOS touch callout
+              touchAction: 'none',
+              userSelect: 'none',
+              WebkitUserSelect: 'none',
+              WebkitTouchCallout: 'none', // Disable iOS touch callout
               // 터치 영역 확대를 위한 추가 스타일
-              padding: "20px",
-              margin: "-20px",
+              padding: '20px',
+              margin: '-20px',
             }}
             onDragStart={(e) => e.preventDefault()}
             onMouseDown={() => setIsDragging(true)}
@@ -118,8 +118,8 @@ const Card = ({ card }: { card: CardProps }) => {
               className={styles.card3d}
               style={{
                 transform: `rotateX(${rotation.x}deg) rotateY(${rotation.y}deg)`,
-                ["--rotate-x" as keyof Card3DStyle]: `${rotation.x}deg`,
-                ["--rotate-y" as keyof Card3DStyle]: `${rotation.y}deg`,
+                ['--rotate-x' as keyof Card3DStyle]: `${rotation.x}deg`,
+                ['--rotate-y' as keyof Card3DStyle]: `${rotation.y}deg`,
               }}
             >
               <div className="relative w-full h-full">
