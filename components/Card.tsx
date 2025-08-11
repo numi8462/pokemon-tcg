@@ -17,13 +17,20 @@ type Card3DStyle = React.CSSProperties & {
   '--rotate-y': string;
 };
 
-const Card = ({ card }: { card: CardProps }) => {
+const Card = ({
+  card,
+  isPriority = false,
+}: {
+  card: CardProps;
+  isPriority?: boolean;
+}) => {
   const [isSelected, setIsSelected] = useState(false);
   const [rotation, setRotation] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
   const [lastTouch, setLastTouch] = useState<{ x: number; y: number } | null>(
     null
   );
+  const [isLoading, setIsLoading] = useState(true);
 
   const handleMove = (deltaX: number, deltaY: number) => {
     setRotation((prev) => ({
@@ -67,12 +74,21 @@ const Card = ({ card }: { card: CardProps }) => {
     <>
       <div className="cursor-pointer" onClick={() => setIsSelected(true)}>
         <div className="aspect-[2/3] relative rounded-xl transition-transform duration-300 hover:scale-105">
+          {isLoading && (
+            <div className="absolute inset-0 rounded-xl bg-gray-700 animate-pulse my-[15px]"></div>
+          )}
           <Image
             src={card.imageSrc}
             alt={`Card ${card.id}`}
             fill
             className="object-contain"
+            style={{
+              // 이미지가 로딩 중일 때는 숨깁니다
+              opacity: isLoading ? 0 : 1,
+            }}
+            priority={isPriority}
             onDragStart={(e) => e.preventDefault()}
+            onLoadingComplete={() => setIsLoading(false)}
           />
         </div>
       </div>

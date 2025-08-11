@@ -47,6 +47,17 @@ export default function HomePage({
     return nameMatch && typeMatch && rarityMatch && exMatch;
   });
 
+  // 뷰포트 크기별 첫 번째 행 카드 수 계산
+  const getPriorityCount = () => {
+    if (typeof window !== 'undefined') {
+      const width = window.innerWidth;
+      if (width >= 1024) return 8; // lg: 8개
+      if (width >= 768) return 6; // md: 6개
+      return 4; // mobile: 4개
+    }
+    return 8; // SSR 기본값
+  };
+
   return (
     <main className="min-h-screen bg-gray-900">
       <Navbar />
@@ -82,7 +93,9 @@ export default function HomePage({
         {loadingError ? ( // 서버에서 전달받은 오류가 있다면 표시
           <p className="text-red-500">오류: {loadingError}</p>
         ) : (
-          filteredCards.map((card, i) => <Card key={i} card={card} />)
+          filteredCards.map((card, i) => (
+            <Card key={i} card={card} isPriority={i < getPriorityCount()} />
+          ))
         )}
       </div>
     </main>
