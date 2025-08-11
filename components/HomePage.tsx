@@ -89,7 +89,7 @@ export default function HomePage({
         />
         {`(${filteredCards.length})`}
       </div>
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-6xl mx-auto px-4 md:px-8">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-6xl mx-auto px-4 md:px-8 mt-4">
         {loadingError ? ( // 서버에서 전달받은 오류가 있다면 표시
           <p className="text-red-500">오류: {loadingError}</p>
         ) : (

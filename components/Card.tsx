@@ -81,14 +81,11 @@ const Card = ({
             src={card.imageSrc}
             alt={`Card ${card.id}`}
             fill
+            sizes="(max:350px) 260px"
             className="object-contain"
-            style={{
-              // 이미지가 로딩 중일 때는 숨깁니다
-              opacity: isLoading ? 0 : 1,
-            }}
             priority={isPriority}
             onDragStart={(e) => e.preventDefault()}
-            onLoadingComplete={() => setIsLoading(false)}
+            onLoad={() => setIsLoading(false)}
           />
         </div>
       </div>
